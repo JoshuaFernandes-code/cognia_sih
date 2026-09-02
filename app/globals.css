@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tailwind v4 theme: all custom design tokens are defined here.
+   They auto-generate utility classes (e.g. bg-surface-light, text-content-primary).
+───────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Surfaces */
+  --color-surface-light:    #F8FAFC;
+  --color-surface-card:     #FFFFFF;
+  --color-surface-dark:     #0F172A;
+  --color-surface-dark-card:#1E293B;
+
+  /* Content (text) */
+  --color-content-primary:  #0F172A;
+  --color-content-secondary:#334155;
+  --color-content-inverse:  #FFFFFF;
+  --color-content-muted:    #475569;
+
+  /* Accessible action colours */
+  --color-accessible-blue:       #1D4ED8;
+  --color-accessible-blue-hover: #1E40AF;
+  --color-accessible-green:      #15803D;
+  --color-accessible-green-hover:#166534;
+  --color-accessible-amber:      #B45309;
+  --color-accessible-red:        #B91C1C;
+  --color-accessible-focus-ring: #2563EB;
+
+  /* Senior-friendly font scale - COMPACT */
+  --font-size-accessible-sm:   0.875rem;
+  --font-size-accessible-base: 1rem;
+  --font-size-accessible-lg:   1.125rem;
+  --font-size-accessible-xl:   1.25rem;
+  --font-size-accessible-2xl:  1.5rem;
+  --font-size-accessible-3xl:  1.875rem;
+
+  --line-height-accessible-sm:   1.25rem;
+  --line-height-accessible-base: 1.5rem;
+  --line-height-accessible-lg:   1.75rem;
+  --line-height-accessible-xl:   1.75rem;
+  --line-height-accessible-2xl:  2rem;
+  --line-height-accessible-3xl:  1.2;
+
+  /* Min sizes for touch targets - COMPACT */
+  --min-height-touch:    44px;
+  --min-height-touch-lg: 48px;
+  --min-width-touch:     44px;
+  --min-width-touch-lg:  48px;
+
+  /* Border widths */
+  --border-width-3: 2px;
+  --border-width-4: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Dark Mode Overrides
+───────────────────────────────────────────────────────────────────────────── */
+.dark {
+  /* Surfaces */
+  --color-surface-light:    #0F172A;
+  --color-surface-card:     #1E293B;
+
+  /* Content (text) */
+  --color-content-primary:  #F8FAFC;
+  --color-content-secondary:#CBD5E1;
+  --color-content-inverse:  #0F172A;
+  --color-content-muted:    #94A3B8;
+
+  /* Accessible action colours (Adjusted for dark contrast) */
+  --color-accessible-blue:       #3B82F6;
+  --color-accessible-blue-hover: #60A5FA;
+  --color-accessible-green:      #22C55E;
+  --color-accessible-green-hover:#4ADE80;
+  --color-accessible-amber:      #D97706;
+  --color-accessible-red:        #EF4444;
+  --color-accessible-focus-ring: #60A5FA;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base layer
+───────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-surface-light);
+    color: var(--color-content-primary);
+    font-size: var(--font-size-accessible-base);
+    line-height: var(--line-height-accessible-base);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* High-visibility focus indicator (4px solid ring) */
+  :focus-visible {
+    outline: 4px solid var(--color-accessible-focus-ring);
+    outline-offset: 4px;
+  }
+
+  /* Minimum touch targets + mobile-safe interaction on all interactive elements */
+  button,
+  a,
+  input,
+  select {
+    min-height: 48px;
+    touch-action: manipulation;          /* Kills 300ms iOS tap delay */
+    -webkit-tap-highlight-color: transparent; /* Stops iOS swallowing touches via the gray flash */
+    user-select: none;                   /* Prevents long-press text-selection eating the tap */
+    -webkit-user-select: none;
+  }
+
+  ::selection {
+    background-color: #2563EB;
+    color: #FFFFFF;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Kill all animations for users who prefer reduced motion
+───────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Reusable component classes
+───────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .btn-accessible-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--min-height-touch);
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accessible-blue);
+    color: #ffffff;
+    font-size: var(--font-size-accessible-base);
+    font-weight: 700;
+    border-radius: 0.75rem;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    transition: background-color 150ms ease, transform 100ms ease;
+    cursor: pointer;
+  }
+  .btn-accessible-primary:hover {
+    background-color: var(--color-accessible-blue-hover);
+  }
+  .btn-accessible-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-accessible-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--min-height-touch);
+    padding: 0.75rem 1.5rem;
+    background-color: #ffffff;
+    color: var(--color-content-primary);
+    font-size: var(--font-size-accessible-base);
+    font-weight: 700;
+    border-radius: 0.75rem;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    transition: background-color 150ms ease;
+    cursor: pointer;
+  }
+  .btn-accessible-secondary:hover {
+    background-color: #f1f5f9;
+  }
+
+  .card-accessible {
+    background-color: var(--color-surface-card);
+    border: 2px solid #cbd5e1;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  }
+}
+
+/* ── Guide Mode: slow, gentle blink for hints ───────────────────────────────
+   2-second ease-in-out cycle — calming for elderly users, never jarring.
+─────────────────────────────────────────────────────────────────────────── */
+@keyframes guide-blink {
+  0%, 100% { opacity: 1;    box-shadow: 0 0 0 4px #C4B5FD; }
+  50%       { opacity: 0.45; box-shadow: 0 0 0 0px #C4B5FD; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
