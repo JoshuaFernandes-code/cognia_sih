@@ -31,7 +31,16 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 ```
 
-[Seated Physical Task] + [Cognitive Recall] ──► Irisin Release ──► Hippocampal BDNF ──► Synaptogenesis & Neuroplasticity
+[Seated Physical Task] + [Cognitive Recall]
+│
+▼
+Irisin Release
+│
+▼
+Hippocampal BDNF
+│
+▼
+Synaptogenesis & Neuroplasticity
 
 ```
 
@@ -46,16 +55,16 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 ```
 
-+-----------------------------------------------------------------------------------+
-|                            COGNIA SESSION STATE MACHINE                           |
-+-----------------------------------------------------------------------------------+
-|  Step 1: Greeting & Orientation    ---> Temporal orientation (Day/Time/Weather)    |
-|  Step 2: Mood & Affective Check    ---> Baseline emotional tracking (Emoji/Voice) |
-|  Step 3: Guided Breathing Pacer    ---> Anxiety reduction & sundowning dampening  |
-|  Step 4: Dual-Task Exergaming      ---> MediaPipe Pose + Dynamic LLM Cognitive Quiz|
-|  Step 5: Task Verification         ---> Confirmation of real-world offline tasks   |
-|  Step 6: Feedback & Streaks        ---> Positive reinforcement & longitudinal log |
-+-----------------------------------------------------------------------------------+
+┌───────────────────────────────────────────────────────────────────┐
+│                   COGNIA SESSION STATE MACHINE                    │
+├───────────────────────────────────────────────────────────────────┤
+│ Step 1: Greeting & Orientation ---> Temporal orientation          │
+│ Step 2: Mood & Affective Check ---> Baseline emotional tracking   │
+│ Step 3: Guided Breathing Pacer ---> Anxiety reduction             │
+│ Step 4: Dual-Task Exergaming   ---> MediaPipe + Dynamic AI Quiz   │
+│ Step 5: Task Verification      ---> Offline task confirmation     │
+│ Step 6: Feedback & Streaks     ---> Longitudinal logging          │
+└───────────────────────────────────────────────────────────────────┘
 
 ```
 
@@ -67,27 +76,28 @@ Designed specifically to address accessibility gaps in regional demographics—i
 ```
 
 ```
-                            +-----------------------------------+
-                            |     CAREGIVER ONBOARDING UI       |
-                            | (Profile, Favorites, NER Context) |
-                            +-----------------+-----------------+
-                                              |
-                                              v
+              ┌───────────────────────────────┐
+              │    CAREGIVER ONBOARDING UI    │
+              │ (Profile, Favorites, Context) │
+              └───────────────┬───────────────┘
+                              │
+                              ▼
 
 ```
 
-+-----------------------+               +-------------------+               +-----------------------+
-|  PATIENT DEVICE (WEB) |               |  SUPABASE ENGINE  |               | DYNAMIC CONTENT AI    |
-| - Web Speech API      |<===>| - PostgreSQL DB   |<===>| - LLM Engine (Temp 0.7|
-| - MediaPipe WASM      |  Telemetry &  | - Row-Level Sec   |  Contextual   | - Anti-Caching Seeds  |
-| - Local RAM Processing|  Session Logs | - User Profiling  |  Payloads     | - Regional NER Context|
-+-----------------------+               +---------+---------+               +-----------------------+
-|
-v
-+-----------------------------------+
-|   CLINICIAN / B2B DASHBOARD UI    |
-| (Longitudinal Trends & Analytics) |
-+-----------------------------------+
+┌───────────────────┐    ┌─────────────────┐    ┌───────────────────┐
+│  PATIENT DEVICE   │    │ SUPABASE ENGINE │    │ DYNAMIC AI ENGINE │
+│ ───────────────── │    │ ─────────────── │    │ ───────────────── │
+│ • Web Speech API  │<==>│ • PostgreSQL DB │<==>│ • OpenAI / Groq   │
+│ • MediaPipe WASM  │    │ • RLS Security  │    │ • Anti-Cache Seed │
+│ • Local Processing│    │ • Profiling     │    │ • NER Context     │
+└───────────────────┘    └────────┬────────┘    └───────────────────┘
+│
+▼
+┌───────────────────────────────┐
+│  CLINICIAN / DASHBOARD PORTAL │
+│ (Longitudinal Data Analytics) │
+└───────────────────────────────┘
 
 ```
 
@@ -141,7 +151,7 @@ npm install
 
 
 3. **Configure Environment Variables:**
-Create a `.env.local` file in the root directory and populate it with your service keys:
+Create a `.env.local` file in the root directory:
 ```env
 # Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=[https://your-supabase-project.supabase.co](https://your-supabase-project.supabase.co)
