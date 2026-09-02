@@ -1,6 +1,6 @@
 
 
-```markdown
+```
 # COGNIA | SIH 2026
 
 > **Privacy-First Dual-Task Exergaming & Person-Centered Cognitive Therapy Platform for Dementia Care**  
