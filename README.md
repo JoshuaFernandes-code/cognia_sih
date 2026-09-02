@@ -1,3 +1,5 @@
+
+
 ```markdown
 # COGNIA | SIH 2026
 
@@ -21,24 +23,18 @@ Designed specifically to address accessibility gaps in regional demographics—i
 * **100% On-Device Pose Tracking:** Utilizes MediaPipe WebAssembly (WASM) to process video frames frame-by-frame inside local browser RAM—video data never touches a server.
 * **Dynamic AI Prompt Generation:** Uses contextual LLM seeding (OpenAI / Groq) infused with caregiver-provided patient history, NER regional culture, and daily routines.
 * **Anti-Repetition Engine:** Implements dynamic seed routing and anti-caching headers (`Cache-Control: no-store`) to ensure non-repetitive, fresh interactions every session.
-* **Multimodal Voice Interface:** Powered by the browser-native Web Speech API (STT/TTS) for accessible, hands-free interaction for patients with visual or motor impairments.
+* **Multimodal Voice Interface:** Powered by Deepgram Aura (TTS) and Groq Whisper v3 (STT) with native Web Speech API fallback for hands-free interaction.
 * **Caregiver & Clinician Dashboard:** Real-time longitudinal telemetry tracking accuracy trends, reaction times, and self-reported mood indexes over 12-week cycles.
 
 ---
 
 ## 🧠 Clinical & Neurobiological Foundation
 
-```text
-[Seated Physical Task] + [Cognitive Recall]
-                   │
-                   ▼
-             Irisin Release
-                   │
-                   ▼
-           Hippocampal BDNF
-                   │
-                   ▼
-     Synaptogenesis & Neuroplasticity
+```mermaid
+graph TD
+    A[" Seated Physical Task + Cognitive Recall "] --> B[" Irisin Release "]
+    B --> C[" Hippocampal BDNF "]
+    C --> D[" Synaptogenesis & Neuroplasticity "]
 
 ```
 
@@ -50,17 +46,13 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 ## 🔄 The 6-Step Daily Session Flow
 
-```text
-┌───────────────────────────────────────────────────────────────────┐
-│                   COGNIA SESSION STATE MACHINE                    │
-├───────────────────────────────────────────────────────────────────┤
-│ Step 1: Greeting & Orientation ---> Temporal orientation          │
-│ Step 2: Mood & Affective Check ---> Baseline emotional tracking   │
-│ Step 3: Guided Breathing Pacer ---> Anxiety reduction             │
-│ Step 4: Dual-Task Exergaming   ---> MediaPipe + Dynamic AI Quiz   │
-│ Step 5: Task Verification      ---> Offline task confirmation     │
-│ Step 6: Feedback & Streaks     ---> Longitudinal logging          │
-└───────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    S1["Step 1: Greeting & Orientation<br/><i>Temporal orientation (Day/Time/Weather)</i>"] --> S2["Step 2: Mood & Affective Check<br/><i>Baseline emotional tracking (Emoji/Voice)</i>"]
+    S2 --> S3["Step 3: Guided Breathing Pacer<br/><i>Anxiety reduction & sundowning dampening</i>"]
+    S3 --> S4["Step 4: Dual-Task Exergaming<br/><i>MediaPipe Pose + Dynamic AI Quiz</i>"]
+    S4 --> S5["Step 5: Task Verification<br/><i>Confirmation of real-world offline tasks</i>"]
+    S5 --> S6["Step 6: Feedback & Streaks<br/><i>Positive reinforcement & longitudinal logging</i>"]
 
 ```
 
@@ -68,26 +60,13 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 ## 🏗 System Architecture
 
-```text
-                  ┌───────────────────────────────┐
-                  │    CAREGIVER ONBOARDING UI    │
-                  │ (Profile, Favorites, Context) │
-                  └───────────────┬───────────────┘
-                                  │
-                                  ▼
-┌───────────────────┐    ┌─────────────────┐    ┌───────────────────┐
-│  PATIENT DEVICE   │    │ SUPABASE ENGINE │    │ DYNAMIC AI ENGINE │
-│ ───────────────── │    │ ─────────────── │    │ ───────────────── │
-│ • Web Speech API  │<==>│ • PostgreSQL DB │<==>│ • OpenAI / Groq   │
-│ • MediaPipe WASM  │    │ • RLS Security  │    │ • Anti-Cache Seed │
-│ • Local Processing│    │ • Profiling     │    │ • NER Context     │
-└───────────────────┘    └────────┬────────┘    └───────────────────┘
-                                  │
-                                  ▼
-                  ┌───────────────────────────────┐
-                  │  CLINICIAN / DASHBOARD PORTAL │
-                  │ (Longitudinal Data Analytics) │
-                  └───────────────────────────────┘
+```mermaid
+graph TD
+    UI["Caregiver Onboarding UI<br/>(Profile, Favorites, NER Context)"] -->|Caregiver Input| SUPA["Supabase Engine<br/>(PostgreSQL DB / RLS Security)"]
+    SUPA -->|Contextual Payload| AI["Dynamic AI Engine<br/>(OpenAI / Groq LLMs)"]
+    AI -->|Personalized Tasks| DEV["Patient Device<br/>(MediaPipe WASM + Voice Pipeline)"]
+    DEV -->|Scalar Telemetry Metrics| SUPA
+    SUPA -->|Analytics & Trends| DASH["Clinician / Dashboard Portal<br/>(Longitudinal Analytics)"]
 
 ```
 
@@ -106,11 +85,12 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 | Domain | Technology | Purpose |
 | --- | --- | --- |
-| **Frontend Framework** | Next.js (React) | Application architecture & state machine management |
-| **Styling & UI** | Tailwind CSS / Lucide | High-contrast, accessible UI design |
+| **Frontend Framework** | Next.js (App Router), React | Application architecture & state machine management |
+| **Styling & UI** | Tailwind CSS v4 / Lucide | High-contrast, accessible UI design |
 | **Computer Vision** | MediaPipe Pose (WASM) | Client-side 33-landmark 3D skeletal tracking |
-| **Voice Processing** | Web Speech API | Browser-native Speech-to-Text & Text-to-Speech |
-| **AI Generator** | OpenAI API / Groq | Dynamic, context-injected prompt generation |
+| **Voice Processing** | Deepgram Aura / Groq Whisper v3 | Natural TTS synthesis & hands-free STT recognition |
+| **High Availability** | Web Speech API | Browser-native zero-latency audio fallback |
+| **AI Generation** | Google AI / Groq LLMs | Dynamic, context-injected prompt generation |
 | **Database & Auth** | Supabase (PostgreSQL) | Secure cloud telemetry storage & Row Level Security |
 | **Deployment** | Vercel | Edge rendering and zero-latency routing |
 
@@ -152,6 +132,9 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 # AI LLM Provider Configuration
 OPENAI_API_KEY=your-openai-api-key
 GROQ_API_KEY=your-groq-api-key
+
+# Voice Provider Configuration
+DEEPGRAM_API_KEY=your-deepgram-api-key
 
 # Application Settings
 NEXT_PUBLIC_APP_URL=http://localhost:3000
