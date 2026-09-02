@@ -28,19 +28,17 @@ Designed specifically to address accessibility gaps in regional demographics—i
 
 ## 🧠 Clinical & Neurobiological Foundation
 
-
-```
-
+```text
 [Seated Physical Task] + [Cognitive Recall]
-│
-▼
-Irisin Release
-│
-▼
-Hippocampal BDNF
-│
-▼
-Synaptogenesis & Neuroplasticity
+                   │
+                   ▼
+             Irisin Release
+                   │
+                   ▼
+           Hippocampal BDNF
+                   │
+                   ▼
+     Synaptogenesis & Neuroplasticity
 
 ```
 
@@ -52,9 +50,7 @@ Synaptogenesis & Neuroplasticity
 
 ## 🔄 The 6-Step Daily Session Flow
 
-
-```
-
+```text
 ┌───────────────────────────────────────────────────────────────────┐
 │                   COGNIA SESSION STATE MACHINE                    │
 ├───────────────────────────────────────────────────────────────────┤
@@ -72,19 +68,13 @@ Synaptogenesis & Neuroplasticity
 
 ## 🏗 System Architecture
 
-
-```
-
-```
-              ┌───────────────────────────────┐
-              │    CAREGIVER ONBOARDING UI    │
-              │ (Profile, Favorites, Context) │
-              └───────────────┬───────────────┘
-                              │
-                              ▼
-
-```
-
+```text
+                  ┌───────────────────────────────┐
+                  │    CAREGIVER ONBOARDING UI    │
+                  │ (Profile, Favorites, Context) │
+                  └───────────────┬───────────────┘
+                                  │
+                                  ▼
 ┌───────────────────┐    ┌─────────────────┐    ┌───────────────────┐
 │  PATIENT DEVICE   │    │ SUPABASE ENGINE │    │ DYNAMIC AI ENGINE │
 │ ───────────────── │    │ ─────────────── │    │ ───────────────── │
@@ -92,12 +82,12 @@ Synaptogenesis & Neuroplasticity
 │ • MediaPipe WASM  │    │ • RLS Security  │    │ • Anti-Cache Seed │
 │ • Local Processing│    │ • Profiling     │    │ • NER Context     │
 └───────────────────┘    └────────┬────────┘    └───────────────────┘
-│
-▼
-┌───────────────────────────────┐
-│  CLINICIAN / DASHBOARD PORTAL │
-│ (Longitudinal Data Analytics) │
-└───────────────────────────────┘
+                                  │
+                                  ▼
+                  ┌───────────────────────────────┐
+                  │  CLINICIAN / DASHBOARD PORTAL │
+                  │ (Longitudinal Data Analytics) │
+                  └───────────────────────────────┘
 
 ```
 
@@ -115,7 +105,7 @@ Synaptogenesis & Neuroplasticity
 ## 🛠 Tech Stack
 
 | Domain | Technology | Purpose |
-| :--- | :--- | :--- |
+| --- | --- | --- |
 | **Frontend Framework** | Next.js (React) | Application architecture & state machine management |
 | **Styling & UI** | Tailwind CSS / Lucide | High-contrast, accessible UI design |
 | **Computer Vision** | MediaPipe Pose (WASM) | Client-side 33-landmark 3D skeletal tracking |
@@ -137,11 +127,12 @@ Synaptogenesis & Neuroplasticity
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/your-username/cognia-sih2026.git](https://github.com/your-username/cognia-sih2026.git)
-   cd cognia-sih2026
+```bash
+git clone [https://github.com/your-username/cognia-sih2026.git](https://github.com/your-username/cognia-sih2026.git)
+cd cognia-sih2026
 
 ```
+
 
 2. **Install dependencies:**
 ```bash
